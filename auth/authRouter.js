@@ -1,13 +1,13 @@
 import authController from "./AuthController.js";
+import roleMiddleware from "../middleware/roleMiddleware.js";
 import { Router } from "express";
 import { check } from "express-validator";
-import roleMiddleware from "../middleware/roleMiddleware.js";
 
 const authRouter = new Router();
 
 authRouter
   .route("/register")
-  .get(authController.getRegistrationForm)
+  .get(authController.getRegisterForm)
   .post(
     [
       check("username", "The username shouldn't be empty").notEmpty(),
@@ -31,11 +31,11 @@ authRouter
         "The password should contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character"
       ).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?]).*$/),
     ],
-    authController.registration
+    authController.register
   );
 
 authRouter
-  .route("/login")
+  .route("/")
   .get(authController.getLoginForm)
   .post(authController.login);
 

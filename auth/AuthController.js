@@ -2,11 +2,13 @@ import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import { validationResult } from "express-validator";
 import { generateAccessToken } from "../jwt/generateAccessToken.js";
+import axios from "axios";
+import Role from "../models/Role.js";
 
 class AuthController {
-  getRegistrationForm = (req, res) => {
+  getRegisterForm = (req, res) => {
     try {
-      res.render("pages/registrationForm");
+      res.render("pages/register");
     } catch (err) {
       console.error(err);
 
@@ -18,7 +20,7 @@ class AuthController {
 
   getLoginForm = (req, res) => {
     try {
-      res.render("pages/loginForm");
+      res.render("pages/login");
     } catch (err) {
       console.error(err);
 
@@ -28,14 +30,23 @@ class AuthController {
     }
   };
 
-  registration = async (req, res) => {
+  register = async (req, res) => {
     try {
       const validationErrors = validationResult(req);
 
       if (!validationErrors.isEmpty())
         return res.status(400).send({ result: validationErrors.array() });
 
-      const { username, password } = req.body;
+      const {
+        username,
+        password,
+        email,
+        firstName,
+        lastName,
+        birthday,
+        country,
+        isAdmin,
+      } = req.body;
       const isRegistered = await User.findOne({ username });
 
       if (isRegistered) {
@@ -45,7 +56,22 @@ class AuthController {
       }
 
       const hashPassword = bcrypt.hashSync(password, 7);
-      const user = new User({ username, password: hashPassword });
+
+      let roles = [];
+      const mainRole = isAdmin ? "ADMIN" : "USER";
+
+      roles = [...roles, mainRole];
+
+      const user = new User({
+        username,
+        password: hashPassword,
+        roles: roles,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        birthday: birthday,
+        country: country,
+      });
 
       await user.save();
 
@@ -72,7 +98,7 @@ class AuthController {
 
       const token = generateAccessToken(user._id, user.roles);
 
-      res.status(200).send({ result: "The user has successfully logged in" });
+      res.status(200).send({ token });
     } catch (err) {
       console.error(err);
 

@@ -1,27 +1,17 @@
 import { createTransport } from "nodemailer";
 
 class EmailController {
-  getEmailForm = (req, res) => {
-    try {
-      res.render("pages/emailForm");
-    } catch (err) {
-      console.error(err);
-
-      res.status(400).send({ result: "The email form hasn't been loaded" });
-    }
-  };
-
   sendEmail = async (req, res) => {
     try {
-      const { sender, recipient, emailData } = req.body;
+      const { recipient, emailData } = req.body;
 
       const config = {
-        host: "smtp.office365.com",
-        port: 587,
+        host: "smtp.mail.ru",
+        port: 465,
         secure: false,
         auth: {
-          user: sender.address,
-          pass: sender.password,
+          user: process.env.EMAIL_ADDRESS,
+          pass: process.env.EMAIL_PASSWORD,
         },
         tls: {
           rejectUnauthorized: false,
@@ -29,6 +19,10 @@ class EmailController {
       };
 
       const transporter = createTransport(config);
+
+      const sender = {
+        address: process.env.EMAIL_ADDRESS,
+      };
 
       const message = {
         from: sender.address,

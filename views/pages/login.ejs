@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -10,18 +10,18 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 <div class="container-fluid d-flex flex-column align-items-center px-0">
-    <div>
-        <h2>Login</h2>
-    </div>
     <div
             class="auth-form-container d-flex flex-column align-items-center"
             id="login-form-container"
     >
-        <form id="login-form">
+        <form class="d-flex flex-column align-items-center" id="login-form">
+            <div>
+                <h2>Login</h2>
+            </div>
             <div class="form-entry" id="username-entry">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required />
@@ -41,7 +41,7 @@
     </div>
     <div class="auth-option-island d-flex">
         <p>Don't have an account? &nbsp;</p>
-        <a href="registration">Register</a>
+        <a href="/register">Register</a>
     </div>
 </div>
 <script
@@ -49,6 +49,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"
 ></script>
-<script type="module" src="scripts/login.js"></script>
+<script type="module" src="/scripts/login.js"></script>
 </body>
 </html>

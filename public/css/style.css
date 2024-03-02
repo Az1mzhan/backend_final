@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --light-gray: #ffffffd3;
+  --red-orange: #ff391bff;
+}
+
+body {
+  background-color: var(--light-gray);
+  font-family: "Montserrat", sans-serif;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+footer,
+.navbar {
+  height: 12.5vh !important;
+  background-color: var(--red-orange) !important;
+}
+
+.nav-item {
+  font-weight: bold;
+}
+
+footer > h5 {
+  padding-left: 1.25vw;
+  font-weight: bold;
+}
+
+a:hover {
+  opacity: 0.75;
+}
+
+.container-fluid {
+  min-height: 100vh;
+  height: auto;
+}
+
+.carousel-item {
+  width: 75vw;
+  height: 75vh;
+  background-color: var(--red-orange);
+  color: black;
+  text-decoration: none;
+}
+
+.carousel-item a {
+  color: black;
+  text-decoration: none;
+}
+
+/*---------------------------*/
+/*          Login            */
+/*---------------------------*/
+
+#login-form {
+  width: 25vw;
+}
+
+#login-button {
+  width: 10vw;
+  margin-top: 5vh;
+  padding: 1.25vh 0;
+  border-radius: 0.5vw;
+}
+
+/*---------------------------*/
+/*        Registration       */
+/*---------------------------*/
+
+.form-entry {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-entry > input,
+#registration-button {
+  margin-top: 0.25vh;
+}
+
+.form-entry > input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 0.125vh solid black;
+}
+
+.form-entry > input {
+  width: 13.75vw;
+}
+
+.form-entry > input[type="checkbox"] {
+  width: 2.5vw;
+}
+
+.form-entry > input:focus {
+  outline: none;
+}
+
+.auth-option-island > a {
+  font-weight: bold;
+}
+
+#registration-form {
+  width: 62.5vw;
+}
+
+#registration-form,
+#login-form {
+  background-color: var(--red-orange);
+  margin-top: 3.75vh;
+  padding: 3.75vh;
+  border-radius: 1.25vw;
+  font-weight: bold;
+  box-shadow: 0.25vw 0.75vw 1vw grey;
+}
+
+#registration-form h2 {
+  margin-bottom: 5vh;
+}
+
+#registration-fields {
+  gap: 5vw;
+}
+
+#registration-button {
+  margin-top: 3.75vh;
+  background-color: white;
+  border: none;
+  font-weight: bold;
+}
+
+#registration-message {
+  margin-top: 2.5vh;
+}
+
+#is-admin-entry {
+  flex-direction: row;
+  align-items: center;
+}
+
+/*---------------------------*/
+/*        Post page          */
+/*---------------------------*/
+
+.post-title {
+  margin-top: 5vh;
+}
+
+.post-meta-data {
+  gap: 5vw;
+}
+
+.post-meta-data > div {
+  gap: 0.5vw;
+}

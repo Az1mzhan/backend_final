@@ -32,38 +32,40 @@
             </div>
         </div>
     </nav>
-    <% users.forEach(user => { %>
-        <div class="user d-flex flex-column align-items-center">
-            <p class="username">
-                Username: <%= user.username %>
-            </p>
-            <p class="password">
-                Password: <%= user.password %>
-            </p>
-            <div class="roles">
-                <% user.roles.forEach(role => { %>
-                    <p>
-                        Role: <%= role.value %>
-                    </p>
-                <% }) %>
+    <div class="post d-flex flex-column align-items-center">
+        <h1 class="post-title">
+            <%= post.title %>
+        </h1>
+        <div class="post-meta-data d-flex">
+            <div class="post-author d-flex">
+                <p class="post-author-key">
+                    Author:
+                </p>
+                <p class="post-author-value">
+                    <%= post.author %>
+                </p>
             </div>
-            <p class="email">
-                Email: <%= user.email %>
-            </p>
-            <p class="firstName">
-                First name: <%= user.firstName %>
-            </p>
-            <p class="lastName">
-                Last name: <%= user.lastName %>
-            </p>
-            <p class="birthday">
-                Birthday: <%= user.birthday %>
-            </p>
-            <p>
-                Country: <%= user.country %>
-            </p>
+            <div class="post-created d-flex">
+                <p class="post-created-key">
+                    Created:
+                </p>
+                <p class="post-created-value">
+                    <%= (new Date(post.createdAt)).toLocaleString("en-GB", { day: "numeric", month: "long", year: "numeric" }) %>
+                </p>
+            </div>
+            <div class="post-author d-flex">
+                <p class="post-updated-key">
+                    Updated:
+                </p>
+                <p class="post-author-value">
+                    <%= (new Date(post.updatedAt)).toLocaleString("en-GB", { day: "numeric", month: "long", year: "numeric" }) %>
+                </p>
+            </div>
         </div>
-    <% }) %>
+        <p class="post-body">
+            <%= post.body %>
+        </p>
+    </div>
     <footer class="d-flex align-items-center w-100">
         <h5>Azimzhan Mussabayev, IT-2207</h5>
     </footer>

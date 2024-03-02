@@ -1,25 +1,25 @@
-import axios from "axios";
+import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 class AuthService {
   constructor() {
     this.authToken = null;
   }
 
-  getAuthToken() {
+  getAuthToken = () => {
     return this.authToken;
-  }
+  };
 
-  setAuthToken(token) {
+  setAuthToken = (token) => {
     this.authToken = token;
-  }
+  };
 
-  clearAuthToken() {
+  clearAuthToken = () => {
     this.authToken = null;
-  }
+  };
 
-  async handleLogin(username, password) {
+  handleAuth = async (username, password) => {
     try {
-      const response = await axios.post("/login", { username, password });
+      const response = await axios.post("/", { username, password });
       const data = response.data;
 
       if (response.status === 200) {
@@ -29,9 +29,9 @@ class AuthService {
     } catch (error) {
       console.error("Login failed:", error.message);
     }
-  }
+  };
 
-  async makeAuthenticatedRequest() {
+  makeAuthenticatedRequest = async (method, route) => {
     const token = this.getAuthToken();
 
     if (!token) {
@@ -40,11 +40,27 @@ class AuthService {
     }
 
     try {
-      const response = await axios.get("/api/some-protected-endpoint", {
+      let response;
+      const httpHeaders = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      };
+
+      switch (method) {
+        case "GET":
+          response = await axios.get(route, httpHeaders);
+          break;
+        case "POST":
+          response = await axios.post(route, httpHeaders);
+          break;
+        case "PUT":
+          response = await axios.put(route, httpHeaders);
+          break;
+        case "DELETE":
+          response = await axios.delete(route, httpHeaders);
+          break;
+      }
 
       if (response.status === 200) {
         const responseData = response.data;
@@ -55,12 +71,14 @@ class AuthService {
     } catch (error) {
       console.error("Authenticated request failed:", error.message);
     }
-  }
+  };
 
-  handleLogout() {
+  handleLogout = () => {
     this.clearAuthToken();
     console.log("User logged out");
-  }
+  };
 }
 
-export default new AuthService();
+const authService = new AuthService();
+
+export default authService;

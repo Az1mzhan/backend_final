@@ -1,6 +1,34 @@
 import Post from "../models/Post.js";
+import axios from "axios";
 
 class PostController {
+  getPosts = async (req, res) => {
+    try {
+      const posts = await Post.find({});
+
+      res.render("pages/posts", { posts: posts });
+    } catch (err) {
+      console.error(err);
+
+      res.status(500).send("The post has been created successfully.");
+    }
+  };
+
+  getPost = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const post = await Post.findById(id);
+
+      if (!post) return res.status(404).send("Post not found.");
+
+      res.render("pages/post", { post: post });
+    } catch (err) {
+      console.error(err);
+
+      res.status(400).send(err);
+    }
+  };
+
   createPost = async (req, res) => {
     try {
       const { author, title, body } = req.body;
@@ -17,33 +45,6 @@ class PostController {
       console.error(err);
 
       res.status(400).send({ err });
-    }
-  };
-
-  async getPosts(req, res) {
-    try {
-      const posts = await Post.find({});
-
-      res.render("pages/posts", { posts: posts });
-    } catch (err) {
-      console.error(err);
-
-      res.status(500).send("The post has been created successfully.");
-    }
-  }
-
-  getPost = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const post = await Post.findById(id);
-
-      if (!post) return res.status(404).send("Post not found.");
-
-      res.render("pages/post", { post: post });
-    } catch (err) {
-      console.error(err);
-
-      res.status(400).send(err);
     }
   };
 

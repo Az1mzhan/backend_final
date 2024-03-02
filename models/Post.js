@@ -13,4 +13,4 @@ const Post = new Schema(
 
 Post.index({ author: 1, title: 1 }, { unique: true });
 
-export default model("Post", Post);
+export default model("Post", Post, "posts");
